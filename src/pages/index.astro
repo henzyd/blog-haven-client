@@ -4,13 +4,13 @@ import Form from "~/modules/home/form";
 ---
 
 <Layout>
-  <div class="w-full flex justify-center py-8 px-4">
-    <div class="max-w-[800px] flex-col gap-6 w-full flex">
+  <div class="flex w-full justify-center px-4 py-8">
+    <div class="flex w-full max-w-[800px] flex-col gap-6">
       <header class="w-full">
-        <h1 class="text-2xl italic font-medium">BlogHaven</h1>
+        <h1 class="text-2xl font-medium italic">BlogHaven</h1>
       </header>
-      <div class="w-full bg-white p-4 rounded-xl">
-        <div class="border p-4 rounded-md">
+      <div class="w-full rounded-xl bg-white p-4">
+        <div class="rounded-md border p-4">
           <Form client:load />
         </div>
       </div>
