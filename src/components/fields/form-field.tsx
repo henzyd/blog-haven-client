@@ -32,28 +32,23 @@ export default function FormField({
     <Field {...props}>
       {({ field }: FieldProps) => (
         <div className={cn("flex w-full flex-col gap-1", wrapperClassName)}>
-          {label ||
-            (labelProps && (
-              <div className="flex w-full items-center justify-between">
-                <Label
-                  {...labelProps}
-                  htmlFor={props.name}
-                  className={cn(`!text-xs`, labelProps?.className)}
-                >
-                  {label || labelProps.children}
-                  {required && (
-                    <span className="pl-1 !text-xs !text-red-600">*</span>
-                  )}
-                </Label>
-              </div>
-            ))}
+          {(label || labelProps) && (
+            <div className="flex w-full items-center justify-between">
+              <Label
+                {...labelProps}
+                htmlFor={props.name}
+                className={cn(`!text-xs`, labelProps?.className)}
+              >
+                {label || labelProps?.children}
+                {required && <span className="pl-1 !text-xs !text-red-600">*</span>}
+              </Label>
+            </div>
+          )}
           <Input
             className={cn("w-full", className)}
             {...field}
             {...props}
-            type={
-              type === "password" ? (showPassword ? "text" : "password") : type
-            }
+            type={type === "password" ? (showPassword ? "text" : "password") : type}
             endAdornment={
               type === "password" && (
                 <Button
