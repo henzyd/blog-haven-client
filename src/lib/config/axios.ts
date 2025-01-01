@@ -21,8 +21,7 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    const message =
-      error?.response?.data?.error || error?.message || "Network Error";
+    const message = error?.response?.data?.error || error?.message || "Network Error";
 
     const status = error?.response?.status as number | undefined;
 
@@ -33,8 +32,7 @@ axiosInstance.interceptors.response.use(
     if (message === "Network Error") {
       return notifyError({
         message: "Unstable network",
-        description:
-          "We are experiencing connection issues. Please check your network.",
+        description: "We are experiencing connection issues. Please check your network.",
       });
     }
 
