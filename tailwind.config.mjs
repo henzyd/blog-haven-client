@@ -51,6 +51,25 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+      screens: {
+        smallMobile: { max: "320px" },
+
+        mediumMobile: { max: "375px" },
+
+        largeMobile: { max: "425px" },
+
+        largeMobile_545: { max: "545px" },
+
+        tablet_768: { max: "768px" },
+
+        tablet: { max: "900px" },
+
+        largeTabletAndBelow: { max: "1024px" },
+
+        laptopAndAbove: { min: "1024px" },
+
+        largeLaptop: { min: "1440px" },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
