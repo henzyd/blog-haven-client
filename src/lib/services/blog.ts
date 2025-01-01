@@ -1,19 +1,14 @@
 import { axiosInstance } from "~/lib/config/axios";
 
 class BlogService {
-  static createLocation = async (data: any) => {
-    const { data: response } = await axiosInstance.postForm<Location>(
-      `/api/admin/locations`,
-      data
-    );
+  static createBlog = async (data: any) => {
+    const { data: response } = await axiosInstance.postForm<Blog>(`/api/admin/locations`, data);
 
     return response;
   };
 
-  static getLocations = async () => {
-    const { data: response } = await axiosInstance.get<Location[]>(
-      `/api/admin/locations`
-    );
+  static getBlogs = async () => {
+    const { data: response } = await axiosInstance.get<Blog[]>(`/api/admin/locations`);
 
     return response;
   };
