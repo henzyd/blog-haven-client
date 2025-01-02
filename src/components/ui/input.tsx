@@ -1,13 +1,12 @@
 import * as React from "react";
 import { cn } from "~/lib/utils/helpers";
 
-// Define the extended props
-interface Props extends React.ComponentProps<"input"> {
+export interface InputProps extends React.ComponentProps<"input"> {
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 }
 
-const Input = React.forwardRef<HTMLInputElement, Props>(
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, startAdornment, endAdornment, ...props }, ref) => {
     return (
       <div className="relative flex items-center">
@@ -33,5 +32,3 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
 Input.displayName = "Input";
 
 export { Input };
-
-export type InputProps = React.ComponentProps<typeof Input>;

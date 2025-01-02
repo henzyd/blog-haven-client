@@ -8,11 +8,14 @@ import { Button } from "../ui/button";
 import { Label, type LabelProps } from "../ui/label";
 import { cn } from "~/lib/utils/helpers";
 import { Input, type InputProps } from "../ui/input";
+import { Textarea, type TextareaProps } from "../ui/textarea";
 
-type Props = InputProps &
+type Props = (InputProps & TextareaProps) &
   FieldConfig & {
     wrapperClassName?: string;
     label?: string;
+    multiline?: boolean;
+    row?: number;
     labelProps?: LabelProps;
   };
 
@@ -21,6 +24,8 @@ export default function FormField({
   wrapperClassName,
   color,
   required,
+  multiline = false,
+  row,
   type,
   label,
   labelProps,
@@ -44,23 +49,27 @@ export default function FormField({
               </Label>
             </div>
           )}
-          <Input
-            className={cn("w-full", className)}
-            {...field}
-            {...props}
-            type={type === "password" ? (showPassword ? "text" : "password") : type}
-            endAdornment={
-              type === "password" && (
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                >
-                  {showPassword ? <BsEyeSlash /> : <AiOutlineEye />}
-                </Button>
-              )
-            }
-          />
+          {multiline ? (
+            <Textarea rows={5} className={cn("w-full", className)} {...field} {...props} />
+          ) : (
+            <Input
+              className={cn("w-full", className)}
+              {...field}
+              {...props}
+              type={type === "password" ? (showPassword ? "text" : "password") : type}
+              endAdornment={
+                type === "password" && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? <BsEyeSlash /> : <AiOutlineEye />}
+                  </Button>
+                )
+              }
+            />
+          )}
           <ErrorMessage
             name={props.name}
             className={`pl-1 !text-xs !font-medium !text-red-600`}
