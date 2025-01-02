@@ -39,17 +39,6 @@ export default function FileField({
     };
   }, []);
 
-  const getImageUrl = (file: File | string) => {
-    if (file instanceof File) {
-      if (objectUrl.current) {
-        URL.revokeObjectURL(objectUrl.current);
-      }
-      objectUrl.current = URL.createObjectURL(file);
-      return objectUrl.current;
-    }
-    return file;
-  };
-
   return (
     <Field {...props}>
       {({ field, form }: FieldProps) => (
@@ -118,7 +107,7 @@ export default function FileField({
           />
           <ErrorMessage
             name={props.name}
-            className={`pl-1 !text-xs !text-red-600`}
+            className={`pl-1 !text-xs !font-medium !text-red-600`}
             component={"p"}
           />
         </div>
