@@ -1,6 +1,7 @@
 ---
 import "~/styles/global.css";
 import Toast from "~/components/toast";
+import TanstackQueryProvider from "~/providers/tanstack-query";
 ---
 
 <!doctype html>
@@ -12,8 +13,10 @@ import Toast from "~/components/toast";
     <meta name="generator" content={Astro.generator} />
     <title>BlogHaven</title>
   </head>
-  <body>
-    <Toast />
-    <slot />
+  <body class="min-h-dvh scroll-smooth">
+    <TanstackQueryProvider client:load>
+      <Toast />
+      <slot />
+    </TanstackQueryProvider>
   </body>
 </html>
