@@ -1,9 +1,13 @@
+import { useMutation } from "@tanstack/react-query";
+import { isAxiosError } from "axios";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import FormField from "~/components/fields/form-field";
 import { Button } from "~/components/ui/button";
 import FileField from "~/components/fields/file-field";
 import { filterPrivateValues } from "~/lib/utils/helpers";
+import BlogService from "~/lib/services/blog";
+import { queryClient } from "~/providers/tanstack-query";
 
 const allowedFormats = ["image/jpeg", "image/png", "image/jpg"];
 
@@ -33,13 +37,34 @@ const initialValues: Record<"title" | "subtitle" | "description", string> & {
 };
 
 export default function Form() {
+  const { mutateAsync: createBlog } = useMutation(
+    {
+      mutationFn: BlogService.createBlog,
+      onError: (error) => {
+        if (isAxiosError(error)) {
+          console.log(error);
+        }
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["blogs"],
+        });
+      },
+    },
+    queryClient
+  );
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={async (values) => {
+      onSubmit={async (values, { resetForm }) => {
         const submissionValues = filterPrivateValues(values);
-        console.log(submissionValues);
+        await createBlog(submissionValues, {
+          onSuccess: () => {
+            resetForm();
+          },
+        });
       }}
       validateOnBlur={false}
     >
