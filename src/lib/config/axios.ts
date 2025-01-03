@@ -2,6 +2,7 @@ import axios from "axios";
 import { notifyError } from "~/lib/utils/toast";
 
 export const axiosInstance = axios.create({
+  baseURL: import.meta.env.API_BASE_URL || import.meta.env.PUBLIC_API_BASE_URL,
   headers: {
     common: {
       Accept: "application/json",
