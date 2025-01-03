@@ -1,6 +1,7 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import Form from "~/modules/home/form";
+import BlogList from "~/modules/home/blog-list";
 ---
 
 <Layout>
@@ -9,10 +10,11 @@ import Form from "~/modules/home/form";
       <header class="w-full">
         <h1 class="text-2xl font-medium italic">BlogHaven</h1>
       </header>
-      <div class="w-full rounded-xl bg-white p-4">
+      <div class="flex w-full flex-col gap-8 rounded-xl bg-white p-4">
         <div class="rounded-md border p-4">
           <Form client:load />
         </div>
+        <BlogList client:load />
       </div>
     </div>
   </div>

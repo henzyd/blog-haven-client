@@ -14,7 +14,7 @@ class BlogService {
   };
 
   static deleteBlog = async (id: string) => {
-    const { data: response } = await axiosInstance.get<Blog>(`/blog/${id}`);
+    const { data: response } = await axiosInstance.delete<Blog>(`/blog/${id}`);
 
     return response;
   };
