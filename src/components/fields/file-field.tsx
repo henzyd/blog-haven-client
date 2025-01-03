@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ErrorMessage, Field, type FieldConfig, type FieldProps, useField } from "formik";
 import { Label, type LabelProps } from "../ui/label";
 import { Input, type InputProps } from "../ui/input";
@@ -29,15 +29,6 @@ export default function FileField({
   const [base64StrField] = useField(`_${props.name}_base64`);
 
   const hiddenInputRef = useRef<HTMLInputElement>(null);
-  const objectUrl = useRef<string>(null);
-
-  useEffect(() => {
-    return () => {
-      if (objectUrl.current) {
-        URL.revokeObjectURL(objectUrl.current);
-      }
-    };
-  }, []);
 
   return (
     <Field {...props}>
@@ -72,7 +63,7 @@ export default function FileField({
             onClick={() => hiddenInputRef.current?.click()}
             readOnly
           />
-          {preview && (field.value || base64StrField.value) && (
+          {preview && base64StrField.value && (
             <img
               src={base64StrField.value || "File Selected"}
               width={150}
