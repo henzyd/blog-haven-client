@@ -8,6 +8,7 @@ import FileField from "~/components/fields/file-field";
 import { filterPrivateValues } from "~/lib/utils/helpers";
 import BlogService from "~/lib/services/blog";
 import { queryClient } from "~/providers/tanstack-query";
+import { notifySuccess } from "~/lib/utils/toast";
 
 const allowedFormats = ["image/jpeg", "image/png", "image/jpg"];
 
@@ -62,6 +63,7 @@ export default function Form() {
         const submissionValues = filterPrivateValues(values);
         await createBlog(submissionValues, {
           onSuccess: () => {
+            notifySuccess({ message: "Blog created successfully" });
             resetForm();
           },
         });
